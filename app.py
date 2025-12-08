@@ -13,6 +13,21 @@ from shiny import render, reactive
 from shiny.express import input
 from shiny.express import ui  # as ui
 
+
+#Add title and explanatory text
+ui.h2("Bayesian updating of Hb measurements"),
+ui.p(
+    "This app can be used to determine the probability that a Hb measurement"
+    "is below the threshold for donation. "
+    "You can input one or two measurements, and the app will calculate "
+    "the posterior distribution of the true value using Bayesian updating rules."
+),
+ui.p(
+    "The model accounts for population variability, biological variability, "
+    "and measurement variability."
+),
+ui.hr(),
+
 with ui.layout_columns():
     ui.input_numeric("y1", "First measurement", 7.8, step=0.1)
     ui.input_numeric("y2", "Second measurement", None, step=0.1)
