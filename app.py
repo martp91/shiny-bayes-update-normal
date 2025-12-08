@@ -32,8 +32,9 @@ with ui.layout_columns():
     
     ui.input_action_button("toggle_button", "Show/Hide Extra inputs")
 
-    with ui.panel_conditional(
-        "input.toggle_button % 2 == 1"):
+with ui.panel_conditional(
+    "input.toggle_button % 2 == 1"):
+    with ui.layout_columns():
         ui.input_numeric("cut", "Threshold for above", 7.8, step=0.1)
         ui.input_numeric("mu_pop", "Population mean", 8.5, step=0.1)
         ui.input_numeric(
