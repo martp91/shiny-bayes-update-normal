@@ -157,6 +157,14 @@ def plot():
                 lw=2,
             )
     if "inst" in input.post_type():
+        plt.plot(
+            x,
+            scistats.norm.pdf(x, mu_pop, sig_pop_tot),
+            label="Population+bio distribution",
+            color="C0",
+            ls="--",
+            alpha=alpha_pop,
+        )
         if y1 is not None and y2 is None:
             # plt.plot(
             #     x,
@@ -168,14 +176,6 @@ def plot():
             # )
             plt.plot(
                 x,
-                scistats.norm.pdf(x, mu_pop, sig_pop_tot),
-                label="Population+bio distribution",
-                color="C0",
-                ls="--",
-                alpha=alpha_pop,
-            )
-            plt.plot(
-                x,
                 scistats.norm.pdf(x, mu_inst_post, sig_inst_post),
                 label="Instantaneous posterior",
                 color="C0",
@@ -184,10 +184,10 @@ def plot():
 
     if y2 is not None:
         # Second measurement update
-        mu_inst_post, sig_inst_post = bayesian_update_normal(
+        mu_ss_post, sig_ss_post = bayesian_update_normal(
             mu_inst_post, y2, sig_inst_post, sig_meas_tot
         )
-        mu_ss_post, sig_ss_post = bayesian_update_normal(
+        mu_inst_post, sig_inst_post = bayesian_update_normal(
             mu_ss_post, y2, sig_ss_post, sig_meas
         )
 
